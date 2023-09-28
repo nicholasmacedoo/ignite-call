@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../../lib/prisma'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 export default async function handle(
   req: NextApiRequest,
@@ -41,5 +41,12 @@ export default async function handle(
       (availableWeekDay) => availableWeekDay.week_day === weekday,
     )
   })
+
+  // const blockedDatesRaw = await prisma.$queryRaw`
+  //   SELECT * FROM schedulings S
+  //   WHERE S.user_id = ${user.id}
+  //   AND to_char(S.date, "YYYY-MM") = ${`${year}-${month}`}
+  // `
+
   return res.json({ blockedWeekDays })
 }
